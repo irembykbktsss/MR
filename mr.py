@@ -51,4 +51,3 @@ plt.show()
 
 
 #cv2.imshow("Opening", opening)
-#cv2.waitKey(0)
