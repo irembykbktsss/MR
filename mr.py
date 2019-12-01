@@ -50,4 +50,3 @@ for j in range(6):
 plt.show()
 
 
-#cv2.imshow("Opening", opening)
