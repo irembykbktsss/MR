@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # Reading in and displaying our image
-image = cv2.imread('Y9.jpg')
+image = cv2.imread('Y1.jpg')
 cv2.imshow('Original', image)
 # Create our shapening kernel, it must equal to one eventually
 kernel_sharpening = np.array([[-1,-1,-1], 
