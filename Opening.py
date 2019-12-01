@@ -11,3 +11,4 @@ opening = cv2.morphologyEx(frame, cv2.MORPH_OPEN, kernelMat)
 cv2.imshow("Morfolojik", opening)
 cv2.waitKey(0)
 
+
