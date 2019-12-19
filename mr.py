@@ -1,22 +1,35 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
+import pydicom
+import Image
+import pylab
+import numpy.matlib
 
-# Reading in and displaying our image
-image = cv2.imread('Y1.jpg')
+
+
+
+dFile=pydicom.read_file("/Users/09531/Desktop/MR/000017.dcm") #path to filepython -m pip install matplotlib
+pylab.imshow(dFile.pixel_array,cmap=pylab.cm.bone) # pylab readings and conversion
+pylab.show() #Dispaly
+    
+
+#########################################################################################################
+
+image = cv2.imread('Y10.jpg')
 cv2.imshow('Original', image)
 
+#########################################################################################################
 
-img_median = cv2.medianBlur(image, 5) # Add median filter to image         #GÖRÜNTÜ BULANIKLAŞTIRMA
+img_median = cv2.medianBlur(image, 5)                                     #GÖRÜNTÜ BULANIKLAŞTIRMA
+cv2.imshow('median filter', img_median) 
+cv2.waitKey(0)       
+cv2.destroyAllWindows 
 
-cv2.imshow('median filter', img_median) # Display img with median filter
-cv2.waitKey(0)        # Wait for a key press to
-cv2.destroyAllWindows # close the img window.
+########################################################################################################
 
-
-
-ret,thresh1 = cv2.threshold(img_median,127,255,cv2.THRESH_BINARY)
-ret,thresh2 = cv2.threshold(img_median,127,255,cv2.THRESH_BINARY_INV)                   #THRESHOLDİNG İŞLEMİİ
+ret,thresh1 = cv2.threshold(img_median,127,255,cv2.THRESH_BINARY)           #THRESHOLDİNG İŞLEMİ
+ret,thresh2 = cv2.threshold(img_median,127,255,cv2.THRESH_BINARY_INV)                   
 ret,thresh3 = cv2.threshold(img_median,127,255,cv2.THRESH_TRUNC)
 ret,thresh4 = cv2.threshold(img_median,127,255,cv2.THRESH_TOZERO)
 ret,thresh5 = cv2.threshold(img_median,127,255,cv2.THRESH_TOZERO_INV)
@@ -30,10 +43,12 @@ plt.show()
 
 kernelMat = np.ones((15,15),np.uint8)
 
-opening1 = cv2.morphologyEx(thresh1, cv2.MORPH_OPEN, kernelMat)
+#######################################################################################################
+
+opening1 = cv2.morphologyEx(thresh1, cv2.MORPH_OPEN, kernelMat)            #OPENING İŞLEMİ
 opening2 = cv2.morphologyEx(thresh2, cv2.MORPH_OPEN, kernelMat)
 opening3 = cv2.morphologyEx(thresh3, cv2.MORPH_OPEN, kernelMat)
-opening4= cv2.morphologyEx(thresh4, cv2.MORPH_OPEN, kernelMat)                              #MORFOLOJİK İŞLEMLER
+opening4= cv2.morphologyEx(thresh4, cv2.MORPH_OPEN, kernelMat)                             
 opening5= cv2.morphologyEx(thresh5, cv2.MORPH_OPEN, kernelMat)
 titles2 = ['Original Image','BINARY','BINARY_INV','TRUNC','TOZERO','TOZERO_INV']
 images2 = [image, opening1, opening2, opening3, opening4, opening5]
@@ -43,4 +58,5 @@ for j in range(6):
     plt.xticks([]),plt.yticks([])
 plt.show()
 
+######################################################################################################
 
