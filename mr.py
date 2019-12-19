@@ -5,15 +5,9 @@ from matplotlib import pyplot as plt
 # Reading in and displaying our image
 image = cv2.imread('Y1.jpg')
 cv2.imshow('Original', image)
-# Create our shapening kernel, it must equal to one eventually
-kernel_sharpening = np.array([[-1,-1,-1], 
-                              [-1, 9,-1],
-                              [-1,-1,-1]])                              #GÖRÜNTÜ KESKİNLEŞTİRME 
-# applying the sharpening kernel to the input image & displaying it.
-sharpened = cv2.filter2D(image, -1, kernel_sharpening)
-cv2.imshow('Image Sharpening', sharpened)
 
-img_median = cv2.medianBlur(sharpened, 5) # Add median filter to image         #GÖRÜNTÜ BULANIKLAŞTIRMA
+
+img_median = cv2.medianBlur(image, 5) # Add median filter to image         #GÖRÜNTÜ BULANIKLAŞTIRMA
 
 cv2.imshow('median filter', img_median) # Display img with median filter
 cv2.waitKey(0)        # Wait for a key press to
