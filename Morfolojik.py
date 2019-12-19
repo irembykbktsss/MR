@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-frame = cv2.imread('Y195.jpg',0)
+frame = cv2.imread('Y1.jpg',0)
 cv2.imshow("orjinal",frame)
 
 #Numpy ile kernel matris tanımı
