@@ -2,21 +2,19 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 import pydicom
-import Image
+#import Image
 import pylab
 import numpy.matlib
 
 
-
-
-dFile=pydicom.read_file("/Users/09531/Desktop/MR/000017.dcm") #path to filepython -m pip install matplotlib
-pylab.imshow(dFile.pixel_array,cmap=pylab.cm.bone) # pylab readings and conversion
-pylab.show() #Dispaly
+#dFile=pydicom.read_file("TCGA-02-0003/06-08-1997-MRI BRAIN WWO CONTRAMR-81239/1-3-P Localizer-98688/000000.dcm") #path to filepython -m pip install matplotlib
+#pylab.imshow(dFile.pixel_array,cmap=pylab.cm.bone) # pylab readings and conversion
+#pylab.show() #Dispaly
     
 
 #########################################################################################################
 
-image = cv2.imread('Y10.jpg')
+image = cv2.imread('000015.jpg')
 cv2.imshow('Original', image)
 
 #########################################################################################################
