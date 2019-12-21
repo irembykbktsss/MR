@@ -8,70 +8,82 @@ import numpy.matlib
 import sys
 from PIL import Image
 
-#dFile=pydicom.read_file("TCGA-02-0003/06-08-1997-MRI BRAIN WWO CONTRAMR-81239/1-3-P Localizer-98688/000000.dcm") #path to filepython -m pip install matplotlib
-#pylab.imshow(dFile.pixel_array,cmap=pylab.cm.bone) # pylab readings and conversion
-#pylab.show() #Dispaly
 
-import sys
-from PIL import Image
 
 images = map(Image.open, ['000000.jpg', '000001.jpg', '000002.jpg','000003.jpg','000004.jpg'])
 images2 = map(Image.open, ['000005.jpg', '000006.jpg', '000007.jpg','000008.jpg','000009.jpg'])
+images3 = map(Image.open, ['000010.jpg', '000011.jpg', '000012.jpg','000013.jpg','000014.jpg'])
+images4 = map(Image.open, ['000015.jpg', '000016.jpg', '000017.jpg','000018.jpg','000019.jpg'])
+images5 = map(Image.open, ['000020.jpg', '000021.jpg', '000022.jpg','000023.jpg','000024.jpg'])
 
-new_im = Image.new('RGB', (1250,250)) #creates a new empty image, RGB mode, and size 444 by 95
-new_im2 = Image.new('RGB', (1250,250))
-new_im3 = Image.new('RGB' , (1250,250))
+new_im = Image.new('RGB', (1250,1250)) 
+new_im2 = Image.new('RGB', (1250,1250))
+new_im3 = Image.new('RGB', (1250,1250))
+new_im4 = Image.new('RGB', (1250,1250))
+new_im5 = Image.new('RGB', (1250,1250))
 
-import sys
-from PIL import Image
-
-images = map(Image.open, ['000000.jpg', '000001.jpg', '000002.jpg' , '000003.jpg', '000004.jpg' , '000005.jpg', '000006.jpg', '000007.jpg','000008.jpg' , '000009.jpg'])
-images2 = map(Image.open, ['000005.jpg', '000006.jpg', '000007.jpg','000008.jpg' , '000009.jpg'])
-
-new_im = Image.new('RGB', (1250,250)) 
-new_im2 = Image.new('RGB', (1250,250)) 
-new_im3 = Image.new('RGB', (1250,250)) 
-
-""""
-for i in range(len(a)):
-    for j in range(len(a[i])):
-        print(a[i][j], end=' ')
-    print()
-    """"
 
 x_offset = 0
-y_offset = 0
-for im in range(len(images)):
-    for im2 in range(len(images[im]))
-        new_im.paste(im, (x_offset,0))
-        x_offset += im.size[0]
-    new_im2.paste(im2, (y_offset,0))
-    y_offset += im2.size[0]
+for im in images:
+  new_im.paste(im, (x_offset,0))
+  x_offset += im.size[0]
+#new_im.save('test.jpg')
 
-
-new_im2.save('test.jpg')
-
-"""
 y_offset = 0
 for im2 in images2:
   new_im2.paste(im2, (y_offset,0))
   y_offset += im2.size[0]
+#new_im2.save('test2.jpg')
 
-new_im2.save('test2.jpg')
+z_offset = 0
+for im3 in images3:
+  new_im3.paste(im3, (z_offset,0))
+  z_offset += im3.size[0]
+#new_im3.save('test3.jpg')
 
-new_im.paste(new_im2 , (4,5))
-new_im.save('test3.jpg')
+t_offset = 0
+for im4 in images4:
+  new_im4.paste(im4, (t_offset,0))
+  t_offset += im4.size[0]
+#new_im4.save('test4.jpg')
+
+v_offset = 0
+for im5 in images5:
+  new_im5.paste(im5, (v_offset,0))
+  v_offset += im5.size[0]
+#new_im5.save('test5.jpg')
+
+
+new_im.paste(new_im2,(0,250))
+#new_im.save('son.jpg')
+
+new_im.paste(new_im3 , (0,500))
+#new_im.save('son2.jpg')
+
+new_im.paste(new_im4, (0,750))
+#new_im.save('son3.jpg')
+
+new_im.paste(new_im5, (0,1000))
+new_im.save('son4.jpg')
+
+
+
+
 
 """
+matris= np.array(new_im)
+print(matris,[])
 
-
-
- 
+son = matris.reshape(2,5)
+print(son , [])
+"""
+#matris = new_im.reshape(5,6)
+#new_im.save('test.jpg')
 
 
 #########################################################################################################
-"""
-image = cv2.imread('test.jpg')
+
+image = cv2.imread('son4.jpg')
 cv2.imshow('Original', image)
 
 #########################################################################################################
@@ -114,4 +126,3 @@ for j in range(6):
 plt.show()
 
 ######################################################################################################
-"""
