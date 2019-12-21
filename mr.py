@@ -5,16 +5,73 @@ import pydicom
 #import Image
 import pylab
 import numpy.matlib
-
+import sys
+from PIL import Image
 
 #dFile=pydicom.read_file("TCGA-02-0003/06-08-1997-MRI BRAIN WWO CONTRAMR-81239/1-3-P Localizer-98688/000000.dcm") #path to filepython -m pip install matplotlib
 #pylab.imshow(dFile.pixel_array,cmap=pylab.cm.bone) # pylab readings and conversion
 #pylab.show() #Dispaly
-    
+
+import sys
+from PIL import Image
+
+images = map(Image.open, ['000000.jpg', '000001.jpg', '000002.jpg','000003.jpg','000004.jpg'])
+images2 = map(Image.open, ['000005.jpg', '000006.jpg', '000007.jpg','000008.jpg','000009.jpg'])
+
+new_im = Image.new('RGB', (1250,250)) #creates a new empty image, RGB mode, and size 444 by 95
+new_im2 = Image.new('RGB', (1250,250))
+new_im3 = Image.new('RGB' , (1250,250))
+
+import sys
+from PIL import Image
+
+images = map(Image.open, ['000000.jpg', '000001.jpg', '000002.jpg' , '000003.jpg', '000004.jpg' , '000005.jpg', '000006.jpg', '000007.jpg','000008.jpg' , '000009.jpg'])
+images2 = map(Image.open, ['000005.jpg', '000006.jpg', '000007.jpg','000008.jpg' , '000009.jpg'])
+
+new_im = Image.new('RGB', (1250,250)) 
+new_im2 = Image.new('RGB', (1250,250)) 
+new_im3 = Image.new('RGB', (1250,250)) 
+
+""""
+for i in range(len(a)):
+    for j in range(len(a[i])):
+        print(a[i][j], end=' ')
+    print()
+    """"
+
+x_offset = 0
+y_offset = 0
+for im in range(len(images)):
+    for im2 in range(len(images[im]))
+        new_im.paste(im, (x_offset,0))
+        x_offset += im.size[0]
+    new_im2.paste(im2, (y_offset,0))
+    y_offset += im2.size[0]
+
+
+new_im2.save('test.jpg')
+
+"""
+y_offset = 0
+for im2 in images2:
+  new_im2.paste(im2, (y_offset,0))
+  y_offset += im2.size[0]
+
+new_im2.save('test2.jpg')
+
+new_im.paste(new_im2 , (4,5))
+new_im.save('test3.jpg')
+
+"""
+
+
+
+ 
+
 
 #########################################################################################################
-
-image = cv2.imread('000015.jpg')
+"""
+image = cv2.imread('test.jpg')
 cv2.imshow('Original', image)
 
 #########################################################################################################
@@ -57,4 +114,4 @@ for j in range(6):
 plt.show()
 
 ######################################################################################################
-
+"""
