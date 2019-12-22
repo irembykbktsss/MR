@@ -14,7 +14,7 @@ images = map(Image.open, ['000000.jpg', '000001.jpg', '000002.jpg','000003.jpg',
 images2 = map(Image.open, ['000005.jpg', '000006.jpg', '000007.jpg','000008.jpg','000009.jpg'])
 images3 = map(Image.open, ['000010.jpg', '000011.jpg', '000012.jpg','000013.jpg','000014.jpg'])
 images4 = map(Image.open, ['000015.jpg', '000016.jpg', '000017.jpg','000018.jpg','000019.jpg'])
-images5 = map(Image.open, ['000020.jpg', '000021.jpg', '000022.jpg','000023.jpg','000024.jpg'])
+images5 = map(Image.open, ['000020.jpg', '000021.jpg', '000022.jpg'])
 
 new_im = Image.new('RGB', (1250,1250)) 
 new_im2 = Image.new('RGB', (1250,1250))
@@ -27,47 +27,32 @@ x_offset = 0
 for im in images:
   new_im.paste(im, (x_offset,0))
   x_offset += im.size[0]
-#new_im.save('test.jpg')
 
 y_offset = 0
 for im2 in images2:
   new_im2.paste(im2, (y_offset,0))
   y_offset += im2.size[0]
-#new_im2.save('test2.jpg')
 
 z_offset = 0
 for im3 in images3:
   new_im3.paste(im3, (z_offset,0))
   z_offset += im3.size[0]
-#new_im3.save('test3.jpg')
 
 t_offset = 0
 for im4 in images4:
   new_im4.paste(im4, (t_offset,0))
   t_offset += im4.size[0]
-#new_im4.save('test4.jpg')
 
 v_offset = 0
 for im5 in images5:
   new_im5.paste(im5, (v_offset,0))
   v_offset += im5.size[0]
-#new_im5.save('test5.jpg')
-
 
 new_im.paste(new_im2,(0,250))
-#new_im.save('son.jpg')
-
 new_im.paste(new_im3 , (0,500))
-#new_im.save('son2.jpg')
-
 new_im.paste(new_im4, (0,750))
-#new_im.save('son3.jpg')
-
 new_im.paste(new_im5, (0,1000))
-new_im.save('son4.jpg')
-
-
-
+new_im.save('hasta8.jpg')
 
 
 """
@@ -83,7 +68,7 @@ print(son , [])
 
 #########################################################################################################
 
-image = cv2.imread('son4.jpg')
+image = cv2.imread('hasta8.jpg')
 cv2.imshow('Original', image)
 
 #########################################################################################################
@@ -126,3 +111,27 @@ for j in range(6):
 plt.show()
 
 ######################################################################################################
+"""
+bilateral_filtered_image = cv2.bilateralFilter(opening3, 5, 175, 175)
+cv2.imshow('Bilateral', bilateral_filtered_image)
+cv2.waitKey(0)
+"""
+
+edge_detected_image = cv2.Canny(opening5, 75, 200)                #EDGE DETECTION
+cv2.imshow('Edge', edge_detected_image)
+cv2.waitKey(0)
+
+######################################################################################################
+
+contours, hierarchy = cv2.findContours(edge_detected_image, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+                                                                       #CONTOURS
+contour_list = []
+for contour in contours:
+    approx = cv2.approxPolyDP(contour,0.01*cv2.arcLength(contour,True),True)
+    area = cv2.contourArea(contour)
+    if ((len(approx) > 8) & (len(approx) < 23) & (area > 30) ):
+        contour_list.append(contour)
+
+cv2.drawContours(opening5, contour_list,  -1, (65,0 ,100), 2)
+cv2.imshow('Objects Detected',opening5)
+cv2.waitKey(0)
