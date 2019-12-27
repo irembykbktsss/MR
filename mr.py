@@ -60,7 +60,7 @@ new_im.save('Hasta3.jpg')
 image = cv2.imread('Hasta1y.jpg')                     #orijinal görüntü
 cv2.imshow('Original', image)
 """
-image = cv2.imread('Hasta11y.jpg')
+image = cv2.imread('Hasta17y.jpg')
 plt.title('Orijinal')
 plt.imshow(image)
 plt.show()
@@ -91,13 +91,18 @@ plt.show()
 
 #######################################################################################################
 
-kernel = cv2.getStructuringElement(cv2.MORPH_RECT,(5,5))
-array([[1, 1, 1, 1, 1],
-       [1, 1, 1, 1, 1],
-       [1, 1, 1, 1, 1],
-       [1, 1, 1, 1, 1],
-       [1, 1, 1, 1, 1]], dtype=uint8)
-#kernel = np.ones((5,5),np.uint8)                                  #EROSION
+kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(10,10))
+array([[1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ],
+       [1, 1, 1, 1, 1 , 1 , 1 , 1 , 1 , 1 ]], dtype=uint8)
+#kernel = np.ones((10,10),np.uint8)                                  #EROSION
 
 erosion = cv2.erode(thresh4 ,kernel,iterations = 1) 
 #cv2.imshow('Erosion',erosion)
@@ -106,26 +111,16 @@ plt.title('Erosion')
 plt.imshow(erosion)
 plt.show()
 
+########################################################################################################
 
-erosion2 = cv2.erode(erosion ,kernel,iterations = 1)                                   #EROSION
-#cv2.imshow('Erosion',erosion2)
-#cv2.waitKey(0)
-plt.title('Erosion2')
-plt.imshow(erosion2)
+opening = cv2.morphologyEx(erosion, cv2.MORPH_OPEN, kernel)           #OPENING
+plt.title('Opening')
+plt.imshow(opening)
 plt.show()
 
 #########################################################################################################
 
-gradient = cv2.morphologyEx(erosion2, cv2.MORPH_GRADIENT, kernel)     #GRADIENT
-#cv2.imshow('Gradient',gradient)
-#cv2.waitKey(0)
-plt.title('Gradient')
-plt.imshow(gradient)
-plt.show()
-
-#########################################################################################################
-
-edge_detected_image = cv2.Canny(gradient, 75, 200)                   #EDGE DETECTION
+edge_detected_image = cv2.Canny(opening, 75, 200)                   #EDGE DETECTION
 #cv2.imshow('Edge', edge_detected_image)
 #cv2.waitKey(0)
 plt.title('Edge Detection')
@@ -143,20 +138,11 @@ for contour in contours:
     if ((len(approx) > 8) & (len(approx) < 23) & (area > 30) ):
         contour_list.append(contour)
 
-k = cv2.drawContours(gradient, contour_list,  -1, (65,0 ,200), 2)
+k = cv2.drawContours(opening, contour_list,  -1, (65,0 ,200), 2)
 #cv2.imshow('Objects Detected',gradient)
 #cv2.waitKey(0)
 plt.title('Contours')
-plt.imshow(gradient)
+plt.imshow(opening)
 plt.show()
 
 #######################################################################################################
-"""
-erosion2 = cv2.erode(k ,kernel,iterations = 1)                                   #EROSION
-#cv2.imshow('Erosion',erosion2)
-#cv2.waitKey(0)
-plt.title('Erosion')
-plt.imshow(erosion2)
-plt.show()
-
-"""
